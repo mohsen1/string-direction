@@ -7,7 +7,9 @@
 
 var ltrText = 'Hello, world!',
     rtlText = 'سلام دنیا',
-    bidiText = 'Hello in Farsi is سلام';
+    bidiText = 'Hello in Farsi is سلام',
+    LTR_MARK = "\u200e",
+    RTL_MARK = "\u200f";
 
 describe('stringDirection', function(){
   if(typeof require === 'function') {
@@ -71,6 +73,15 @@ describe('stringDirection', function(){
       it('should return "bidi" with bidi variable', function(){
         expect(stringDirection.getDirection(bidiText)).toBe('bidi');
       });
+
+      it('should return "ltr" with variables that has LTR mark', function(){
+        expect(stringDirection.getDirection(LTR_MARK + ltrText)).toBe('ltr');
+      });
+
+      it('should return "lte" with variables that has RTL mark', function(){
+        expect(stringDirection.getDirection(RTL_MARK + ltrText)).toBe('rtl');
+      });
+
     });
 
   });

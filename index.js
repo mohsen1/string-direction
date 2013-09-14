@@ -68,12 +68,20 @@
    * @returns {boolean} - True if given string has direction specific characters, False otherwise
   */
   function hasDirectionCharacters(string, direction) {
-    var i, char, range, isRtl = false;
+    var i, char, range, charIsRtl,
+        hasRtl = false,
+        hasLtr = false;
 
+    // Loop through each character
     for(i=0; i<string.length; i++) {
       char = string.charAt(i);
 
+      // Assume character is not rtl
+      charIsRtl = false;
+      
+      // Test each character against all ltr script ranges
       for (range in rtlSciriptRanges) {
+
 
         if (rtlSciriptRanges.hasOwnProperty(range)) {
 
@@ -81,16 +89,27 @@
             rtlSciriptRanges[range][0],
             rtlSciriptRanges[range][1])
             ){
-            isRtl = true;
+
+            // If character is rtl, set rtl flag (hasRtl) for string to true
+            hasRtl = true;
+
+            // Set rtl flag for this character to true
+            charIsRtl = true;
           }
         }
+      }
+
+      // If this character is *not* rtl then it is ltr and string has
+      // ltr characters
+      if(charIsRtl === false) {
+        hasLtr = true;
       }
     }
 
     if(direction === RTL)
-      return isRtl;
+      return hasRtl;
     if(direction === LTR)
-      return !isRtl;
+      return hasLtr;
   }
 
   /**
@@ -117,7 +136,7 @@
     };
   }
 
-
+  // TODO make it AMD friendly
   if(typeof exports !== 'undefined') {
     exports.getDirection = getDirection;
     exports.patch = patchStringPrototype;
