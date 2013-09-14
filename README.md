@@ -34,3 +34,6 @@ Use `script` tag to include the library
 ## Credits
 This library is influenced by [string-direction](https://github.com/laMarciana/string-direction) Ruby library by Marc Busqué
 
+### License
+MIT
+
