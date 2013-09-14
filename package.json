@@ -4,7 +4,7 @@
   "description": "String Direction is a JavaScript library for detection of direction of `String` objects in JavaScript.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine-node string-direction-spec.js"
   },
   "repository": "",
   "keywords": [
@@ -16,5 +16,8 @@
   "author": "Mohsen Azimi",
   "license": "BSD",
   "readmeFilename": "README.md",
-  "gitHead": "bb9be815cd5d207b177f2723e7cc4336629604eb"
+  "gitHead": "bb9be815cd5d207b177f2723e7cc4336629604eb",
+  "dependencies": {
+    "jasmine-node": "~1.11.0"
+  }
 }

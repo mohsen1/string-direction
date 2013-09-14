@@ -14,10 +14,10 @@ describe('String Direction', function(){
 
   describe('#getDirection', function(){
 
-    it('return correct direction when calling StringDirection.getDirection and passing string variables', function(){
-      expect(StringDirection.getDirection(ltrText)).toBe('ltr');
-      expect(StringDirection.getDirection(rtlText)).toBe('rtl');
-      expect(StringDirection.getDirection(bidiText)).toBe('bidi');
+    it('return correct direction when calling stringDirection.getDirection and passing string variables', function(){
+      expect(stringDirection.getDirection(ltrText)).toBe('ltr');
+      expect(stringDirection.getDirection(rtlText)).toBe('rtl');
+      expect(stringDirection.getDirection(bidiText)).toBe('bidi');
     });
 
   });
