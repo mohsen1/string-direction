@@ -5,15 +5,25 @@ var LTR_MARK = "\u200e",
     BIDI = 'bidi';
 
 var rtlSciriptRanges = {
-  Hebrew: ["0590","05FF"],
-  Arabic: ["0600","06FF"],
-  NKo: ["07C0","07FF"],
-  Syriac: ["0700","074F"],
-  Thaana: ["0780","07BF"],
+  Hebrew:   ["0590","05FF"],
+  Arabic:   ["0600","06FF"],
+  NKo:      ["07C0","07FF"],
+  Syriac:   ["0700","074F"],
+  Thaana:   ["0780","07BF"],
   Tifinagh: ["2D30","2D7F"],
 }
 
 function getDirection(string) {
+
+  console.log(arguments);
+
+  if(typeof string === 'undefined'){
+    throw new Error('TypeError missing argument');
+  }
+
+  if(typeof string !== 'string'){
+    throw new Error('TypeError getDirection expects strings');
+  }
 
   if(string.indexOf(LTR_MARK) > -1 && string.indexOf(RTL_MARK) > -1) {
     return BIDI;
@@ -57,7 +67,7 @@ function hasRtlCharacters(string) {
       }
 
     }
-    
+
   }
 
   return false;
@@ -70,8 +80,20 @@ function isInScriptRange(char, from, to) {
 
   return charCode > from && charCode < to;
 }
-exports.getDirection = getDirection;
 
-exports.patch = function patchString () {
-  String.prototype.getDirection = getDirection;
+ function patchStringPrototype () {
+  String.prototype.getDirection = function() {
+    return getDirection(this);
+  };
+}
+
+
+if(typeof exports !== 'undefined') {
+  exports.getDirection = getDirection;
+  exports.patch = patchStringPrototype;
+} else {
+  var stringDirection = {
+    getDirection: getDirection,
+    patch: patchStringPrototype
+  }
 }
