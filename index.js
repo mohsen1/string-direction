@@ -13,6 +13,13 @@ var rtlSciriptRanges = {
   Tifinagh: ["2D30","2D7F"],
 }
 
+
+/*
+ * Gets string direction
+ * @param {string} - String to check for direction
+ * @returns {string} - 'ltr' if given string is left-to-right, 
+ * 'rtl' if it's right-to-left and 'bidi' if it has both types of characters 
+*/
 function getDirection(string) {
 
   if(typeof string === 'undefined'){
@@ -52,7 +59,12 @@ function getDirection(string) {
   }
 
 }
-
+/**
+ * Determine if a string has characters in right-to-left or left-to-right Unicode blocks
+ * @param {string} string - String to check for characters
+ * @param {string} direction - Direction to check. Either 'ltr' or 'rtl' string
+ * @returns {boolean} - True if given string has direction specific characters, False otherwise
+*/
 function hasCharacters(string, direction) {
   var i, char, range, isRtl = false;
 
@@ -79,7 +91,13 @@ function hasCharacters(string, direction) {
     return !isRtl;
 }
 
-
+/**
+ * Checks if a a character is in a Unicode block range
+ * @param {string} char - The character to check. An string with only one character
+ * @param {string} from - Starting Unicode code of block in hexadecimal. Example: "2D30"
+ * @param {string} to - Ending Unicode code of block in hexadecimal. Example: "2F30"
+ * @returns {boolean} - true if char is in range.
+*/
 function isInScriptRange(char, from, to) {
   var charCode = char.charCodeAt(0),
       fromCode = parseInt(from, 16),
@@ -88,6 +106,9 @@ function isInScriptRange(char, from, to) {
   return charCode > fromCode && charCode < toCode;
 }
 
+/**
+ * Monkey-patch String global object to expose getDirection method
+*/
  function patchStringPrototype () {
   String.prototype.getDirection = function() {
     return getDirection(this.valueOf());
