@@ -103,6 +103,14 @@ describe('stringDirection', function(){
         expect(bidiText.getDirection()).toBe('bidi');
       });
 
+      it('should return "ltr" with variables that has LTR mark', function(){
+        expect((LTR_MARK + ltrText).getDirection()).toBe('ltr');
+      });
+
+      it('should return "lte" with variables that has RTL mark', function(){
+        expect((RTL_MARK + ltrText).getDirection()).toBe('rtl');
+      });
+
     });
 
   });
