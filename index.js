@@ -15,8 +15,6 @@ var rtlSciriptRanges = {
 
 function getDirection(string) {
 
-  console.log(arguments);
-
   if(typeof string === 'undefined'){
     throw new Error('TypeError missing argument');
   }
@@ -37,8 +35,16 @@ function getDirection(string) {
     return RTL;
   }
 
-  else if(hasRtlCharacters(string)) {
+  else if(hasCharacters(string, RTL) && hasCharacters(string, LTR)) {
     return BIDI;
+  }
+
+  else if(hasCharacters(string, LTR)) {
+    return LTR;
+  }
+
+  else if(hasCharacters(string, RTL)) {
+    return RTL;
   }
 
   else {
@@ -47,8 +53,8 @@ function getDirection(string) {
 
 }
 
-function hasRtlCharacters(string) {
-  var i, char, range;
+function hasCharacters(string, direction) {
+  var i, char, range, isRtl = false;
 
   for(i=0; i<string.length; i++) {
     char = string.charAt(i);
@@ -59,31 +65,32 @@ function hasRtlCharacters(string) {
 
         if (isInScriptRange( char,
           rtlSciriptRanges[range][0],
-          rtlSciriptRanges[range][1] )
+          rtlSciriptRanges[range][1])
           ){
-          return true;
+          isRtl = true;
         }
-
       }
-
     }
-
   }
 
-  return false;
+  if(direction === RTL)
+    return isRtl;
+  if(direction === LTR)
+    return !isRtl;
 }
+
 
 function isInScriptRange(char, from, to) {
   var charCode = char.charCodeAt(0),
       fromCode = parseInt(from, 16),
       toCode = parseInt(to, 16);
 
-  return charCode > from && charCode < to;
+  return charCode > fromCode && charCode < toCode;
 }
 
  function patchStringPrototype () {
   String.prototype.getDirection = function() {
-    return getDirection(this);
+    return getDirection(this.valueOf());
   };
 }
 
