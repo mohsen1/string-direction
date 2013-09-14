@@ -72,23 +72,25 @@
         hasRtl = false,
         hasLtr = false;
 
+    // Remove white space
+    string = string.replace(/\s+/, '');
+
     // Loop through each character
     for(i=0; i<string.length; i++) {
       char = string.charAt(i);
 
       // Assume character is not rtl
       charIsRtl = false;
-      
+
       // Test each character against all ltr script ranges
       for (range in rtlSciriptRanges) {
 
 
         if (rtlSciriptRanges.hasOwnProperty(range)) {
 
-          if (isInScriptRange( char,
+          if ( isInScriptRange( char,
             rtlSciriptRanges[range][0],
-            rtlSciriptRanges[range][1])
-            ){
+            rtlSciriptRanges[range][1]) ){
 
             // If character is rtl, set rtl flag (hasRtl) for string to true
             hasRtl = true;

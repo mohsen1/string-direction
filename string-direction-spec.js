@@ -96,7 +96,7 @@ describe('stringDirection', function(){
       });
 
       it('should return "rtl" with rtl variables', function(){
-        expect(ltrText.getDirection()).toBe('rtl');
+        expect(rtlText.getDirection()).toBe('rtl');
       });
 
       it('should return "bidi" with bidi variables', function(){
