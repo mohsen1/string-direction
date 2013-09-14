@@ -12,6 +12,8 @@ var ltrText = 'Hello, world!',
 describe('stringDirection', function(){
   if(typeof require === 'function') {
     var stringDirection = require('./index');
+  }else{
+    var stringDirection = window.stringDirection;
   }
 
   describe('#getDirection', function(){
@@ -58,15 +60,15 @@ describe('stringDirection', function(){
 
     describe('when passing string variables', function(){
 
-      it('should return ltr with ltr variable', function(){
+      it('should return "ltr" with ltr variable', function(){
         expect(stringDirection.getDirection(ltrText)).toBe('ltr');
       });
 
-      it('should return rtl with rtl variable', function(){
+      it('should return "rtl" with rtl variable', function(){
         expect(stringDirection.getDirection(rtlText)).toBe('rtl');
       });
 
-      it('should return bidi with bidi variable', function(){
+      it('should return "bidi" with bidi variable', function(){
         expect(stringDirection.getDirection(bidiText)).toBe('bidi');
       });
     });
@@ -78,15 +80,15 @@ describe('stringDirection', function(){
 
     describe('when calling on string variables', function(){
 
-      it('should return ltr with ltr variables', function(){
+      it('should return "ltr" with ltr variables', function(){
         expect(ltrText.getDirection()).toBe('ltr');
       });
 
-      it('should return rtl with rtl variables', function(){
+      it('should return "rtl" with rtl variables', function(){
         expect(ltrText.getDirection()).toBe('rtl');
       });
 
-      it('should return bidi with bidi variables', function(){
+      it('should return "bidi" with bidi variables', function(){
         expect(bidiText.getDirection()).toBe('bidi');
       });
 
