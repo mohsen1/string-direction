@@ -20,8 +20,8 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "gitHead": "bb9be815cd5d207b177f2723e7cc4336629604eb",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "jasmine-node": "~1.11.0"
-  },
-  "devDependencies": {}
+  }
 }
