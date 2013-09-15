@@ -12,8 +12,8 @@
     NKo:      ["07C0","07FF"],
     Syriac:   ["0700","074F"],
     Thaana:   ["0780","07BF"],
-    Tifinagh: ["2D30","2D7F"],
-  }
+    Tifinagh: ["2D30","2D7F"]
+  };
 
 
   /*
@@ -146,7 +146,7 @@
     this.stringDirection = {
       getDirection: getDirection,
       patch: patchStringPrototype
-    }
+    };
   }
 
 }).call(this);
