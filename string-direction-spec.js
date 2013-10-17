@@ -7,6 +7,7 @@
 
 var ltrText = 'Hello, world!',
     rtlText = 'سلام دنیا',
+    rtlMultilineText = 'שלום\nכיתה\nא\'',
     bidiText = 'Hello in Farsi is سلام',
     LTR_MARK = "\u200e",
     RTL_MARK = "\u200f";
@@ -70,6 +71,10 @@ describe('stringDirection', function(){
         expect(stringDirection.getDirection(rtlText)).toBe('rtl');
       });
 
+      it('should return "rtl" with rtl multiline variable', function(){
+        expect(stringDirection.getDirection(rtlMultilineText)).toBe('rtl');
+      });
+
       it('should return "bidi" with bidi variable', function(){
         expect(stringDirection.getDirection(bidiText)).toBe('bidi');
       });
@@ -78,7 +83,7 @@ describe('stringDirection', function(){
         expect(stringDirection.getDirection(LTR_MARK + ltrText)).toBe('ltr');
       });
 
-      it('should return "lte" with variables that has RTL mark', function(){
+      it('should return "ltr" with variables that has RTL mark', function(){
         expect(stringDirection.getDirection(RTL_MARK + ltrText)).toBe('rtl');
       });
 
@@ -99,8 +104,12 @@ describe('stringDirection', function(){
         expect(rtlText.getDirection()).toBe('rtl');
       });
 
+      it('should return "rtl" with rtl multiline variables', function(){
+        expect(rtlText.getDirection()).toBe('rtl');
+      });
+
       it('should return "bidi" with bidi variables', function(){
-        expect(bidiText.getDirection()).toBe('bidi');
+        expect(bidiMultilineText.getDirection()).toBe('bidi');
       });
 
       it('should return "ltr" with variables that has LTR mark', function(){
