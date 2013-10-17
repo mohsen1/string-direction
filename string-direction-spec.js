@@ -107,7 +107,7 @@ describe('stringDirection', function(){
         expect((LTR_MARK + ltrText).getDirection()).toBe('ltr');
       });
 
-      it('should return "lte" with variables that has RTL mark', function(){
+      it('should return "ltr" with variables that has RTL mark', function(){
         expect((RTL_MARK + ltrText).getDirection()).toBe('rtl');
       });
 
