@@ -105,11 +105,11 @@ describe('stringDirection', function(){
       });
 
       it('should return "rtl" with rtl multiline variables', function(){
-        expect(rtlText.getDirection()).toBe('rtl');
+        expect(rtlMultilineText.getDirection()).toBe('rtl');
       });
 
       it('should return "bidi" with bidi variables', function(){
-        expect(bidiMultilineText.getDirection()).toBe('bidi');
+        expect(bidiText.getDirection()).toBe('bidi');
       });
 
       it('should return "ltr" with variables that has LTR mark', function(){
