@@ -15,7 +15,6 @@
     Tifinagh: ["2D30","2D7F"]
   };
 
-
   /*
    * Gets string direction
    * @param {string} - String to check for direction
@@ -72,8 +71,8 @@
         hasRtl = false,
         hasLtr = false;
 
-    // Remove white space
-    string = string.replace(/\s+/, '');
+    // Remove white space and non directional characters
+    string = string.replace(/\s+|\n|\0|\f|\t|\v|\'|\"/gm, '');
 
     // Loop through each character
     for(i=0; i<string.length; i++) {
@@ -84,7 +83,6 @@
 
       // Test each character against all ltr script ranges
       for (range in rtlSciriptRanges) {
-
 
         if (rtlSciriptRanges.hasOwnProperty(range)) {
 
