@@ -2,9 +2,10 @@
 
   var LTR_MARK = "\u200e",
       RTL_MARK = "\u200f",
-      LTR = 'ltr',
-      RTL = 'rtl',
-      BIDI = 'bidi';
+      LTR = 'ltr', // Left to right direction content
+      RTL = 'rtl', // Right to left direction content
+      BIDI = 'bidi', // Both directions - any and all directions will not be ok
+      NODI = ''; // No direction - any and all directions are ok
 
   var rtlSciriptRanges = {
     Hebrew:   ["0590","05FF"],
@@ -23,42 +24,37 @@
   */
   function getDirection(string) {
 
-    if(typeof string === 'undefined'){
+    if(typeof string === 'undefined')
       throw new Error('TypeError missing argument');
-    }
 
-    if(typeof string !== 'string'){
+    if(typeof string !== 'string')
       throw new Error('TypeError getDirection expects strings');
-    }
 
-    if(string.indexOf(LTR_MARK) > -1 && string.indexOf(RTL_MARK) > -1) {
+    if(string === '')
+      return NODI;
+      
+    if(string.indexOf(LTR_MARK) > -1 && string.indexOf(RTL_MARK) > -1)
       return BIDI;
-    }
 
-    else if(string.indexOf(LTR_MARK) > -1) {
+    if(string.indexOf(LTR_MARK) > -1)
       return LTR;
-    }
 
-    else if(string.indexOf(RTL_MARK) > -1) {
+    if(string.indexOf(RTL_MARK) > -1)
       return RTL;
-    }
 
-    else if(hasDirectionCharacters(string, RTL) && hasDirectionCharacters(string, LTR)) {
+    var hasRtl = hasDirectionCharacters(string, RTL);
+    var hasLtr = hasDirectionCharacters(string, LTR);
+    
+    if(hasRtl && hasLtr)
       return BIDI;
-    }
 
-    else if(hasDirectionCharacters(string, LTR)) {
+    if(hasLtr)
       return LTR;
-    }
 
-    else if(hasDirectionCharacters(string, RTL)) {
+    if(hasRtl)
       return RTL;
-    }
 
-    else {
-      return LTR;
-    }
-
+    return NODI;
   }
   /**
    * Determine if a string has characters in right-to-left or left-to-right Unicode blocks
@@ -69,10 +65,13 @@
   function hasDirectionCharacters(string, direction) {
     var i, char, range, charIsRtl,
         hasRtl = false,
-        hasLtr = false;
+        hasLtr = false,
+        hasDigit = false;
 
+    hasDigit = (sting.search(/[0-9]/) > -1);
+    
     // Remove white space and non directional characters
-    string = string.replace(/\s+|\n|\0|\f|\t|\v|\'|\"/gm, '');
+    string = string.replace(/[\s\n\0\f\t\v\'\"\-0-9\+\?\!]+/gm, '');
 
     // Loop through each character
     for(i=0; i<string.length; i++) {
@@ -107,7 +106,7 @@
     }
 
     if(direction === RTL)
-      return hasRtl;
+      return hasRtl || (!hasLtr && hasDigit);
     if(direction === LTR)
       return hasLtr;
   }
