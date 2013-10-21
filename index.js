@@ -44,7 +44,7 @@
 
     var hasRtl = hasDirectionCharacters(string, RTL);
     var hasLtr = hasDirectionCharacters(string, LTR);
-    
+ 
     if(hasRtl && hasLtr)
       return BIDI;
 
@@ -68,8 +68,8 @@
         hasLtr = false,
         hasDigit = false;
 
-    hasDigit = (sting.search(/[0-9]/) > -1);
-    
+    hasDigit = (string.search(/[0-9]/) > -1);
+
     // Remove white space and non directional characters
     string = string.replace(/[\s\n\0\f\t\v\'\"\-0-9\+\?\!]+/gm, '');
 
@@ -106,9 +106,9 @@
     }
 
     if(direction === RTL)
-      return hasRtl || (!hasLtr && hasDigit);
+      return hasRtl;
     if(direction === LTR)
-      return hasLtr;
+      return hasLtr || (!hasRtl && hasDigit);
   }
 
   /**
