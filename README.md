@@ -10,8 +10,8 @@ var stringDirection = require('string-direction');
 stringDirection.getDirection("Hello, world!"); // 'ltr'
 stringDirection.getDirection("سلام دنیا"); // 'rtl'
 ```
-### `#patch` Patching String object globally
-Using `patch()` method a `getDirection` method will be exposed in `String` object.
+### `#patch` Patching String objects globally
+By using `patch()` method a `getDirection` method will be exposed in `String` object.
 
 ``` javascript
 require('string-direction').patch();
