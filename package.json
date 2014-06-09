@@ -1,6 +1,6 @@
 {
   "name": "string-direction",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "String Direction is a JavaScript library for detection of direction of `String` objects in JavaScript.",
   "main": "index.js",
   "scripts": {
