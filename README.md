@@ -1,5 +1,5 @@
 # String Direction
-String Direction is a JavaScript library for detection of direction of `String` objects in JavaScript.
+A utility for getting direction of a string in JavaScript. String direction can be left-to-right, right-to-left or bi-directional. 
 
 ## Usage
 
